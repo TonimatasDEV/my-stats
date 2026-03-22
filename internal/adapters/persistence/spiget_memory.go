@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+var dataSpiget = make(map[string]int)
+
 func updateSpiget() {
 	for {
 		resp, err := http.Get(domain.Spiget)
@@ -34,6 +36,6 @@ func updateSpiget() {
 
 func processProjectsSpiget(projects []providers.SpigetProject) {
 	for _, project := range projects {
-		dataModrinth[project.Name] = project.Downloads
+		dataSpiget[project.Name] = project.Downloads
 	}
 }

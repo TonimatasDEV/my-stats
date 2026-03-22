@@ -10,6 +10,8 @@ import (
 	"time"
 )
 
+var dataHangar = make(map[string]int)
+
 func updateHangar() {
 	for {
 		resp, err := http.Get(domain.Hangar)
@@ -34,6 +36,6 @@ func updateHangar() {
 
 func processProjectsHangar(projects []providers.HangarProject) {
 	for _, project := range projects {
-		dataModrinth[project.Name] = project.Stats.Downloads
+		dataHangar[project.Name] = project.Stats.Downloads
 	}
 }
