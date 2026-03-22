@@ -16,7 +16,7 @@ type MainMessage struct {
 
 func HandleMain(c *gin.Context) {
 	mainMessage := MainMessage{
-		Msg:          "Hello World! This is the best api to get countries, states and cities!",
+		Msg:          "Hello World! This is an API to get my projects stats",
 		Wiki:         "https://github.com/TonimatasDEV/my-stats",
 		License:      "https://github.com/TonimatasDEV/my-stats/blob/master/LICENSE",
 		Repository:   "https://github.com/TonimatasDEV/my-stats",
