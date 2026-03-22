@@ -2,7 +2,7 @@ package persistence
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 	"my-stats/internal/domain"
 	"my-stats/internal/domain/providers"
 	"my-stats/internal/util"
@@ -24,7 +24,7 @@ func updateCurseForge() {
 		var author providers.CurseForgeAuthor
 
 		if err := json.NewDecoder(resp.Body).Decode(&author); err != nil {
-			fmt.Println("Error decoding JSON:", err)
+			log.Println("Error decoding JSON:", err)
 			time.Sleep(1 * time.Minute)
 			continue
 		}
@@ -46,7 +46,7 @@ func processProjectsCurseForge(projects []providers.CurseForgeProject) {
 		var projectInfo providers.CurseForgeProjectInfo
 
 		if err := json.NewDecoder(resp.Body).Decode(&projectInfo); err != nil {
-			fmt.Println("Error decoding JSON:", err)
+			log.Println("Error decoding JSON:", err)
 			continue
 		}
 

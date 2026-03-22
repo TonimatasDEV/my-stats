@@ -2,7 +2,7 @@ package persistence
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 	"my-stats/internal/domain"
 	"my-stats/internal/domain/providers"
 	"my-stats/internal/util"
@@ -21,7 +21,7 @@ func updateSpiget() {
 		var projects []providers.SpigetProject
 
 		if err := json.NewDecoder(resp.Body).Decode(&projects); err != nil {
-			fmt.Println("Error decoding JSON:", err)
+			log.Println("Error decoding JSON:", err)
 			time.Sleep(1 * time.Minute)
 			continue
 		}
