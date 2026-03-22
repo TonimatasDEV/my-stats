@@ -41,6 +41,7 @@ func main() {
 	router = gin.Default()
 	router.Use(cors.Default())
 
+	router.GET("/", handlers.HandleMain)
 	router.GET("cfwidget", cfwidgetHandler.GetProjects)
 	router.GET("hangar", hangarHandler.GetProjects)
 	router.GET("modrinth", modrinthHandler.GetProjects)
