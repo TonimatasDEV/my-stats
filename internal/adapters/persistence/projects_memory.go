@@ -21,7 +21,8 @@ func NewMemoryProjectsRepository(updateFunc func(data map[string]int)) repositor
 		done:       make(chan struct{}),
 	}
 
-	repo.ticker = time.NewTicker(1 * time.Minute)
+	updateFunc(repo.data)
+	repo.ticker = time.NewTicker(time.Minute)
 
 	go repo.startTicker()
 
