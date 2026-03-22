@@ -1,7 +1,6 @@
 package main
 
 import (
-	"my-stats/internal/adapters/persistence"
 	"os"
 
 	"github.com/gin-contrib/cors"
@@ -21,7 +20,6 @@ func main() {
 	// Handlers
 
 	// Router
-	persistence.Update()
 	router = gin.Default()
 	router.Use(cors.Default())
 

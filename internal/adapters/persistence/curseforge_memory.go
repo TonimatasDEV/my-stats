@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-var data = make(map[string]int)
+var dataCurseForge = make(map[string]int)
 
-func Update() {
+func updateCurseForge() {
 	for {
 		resp, err := http.Get(domain.CFWidget)
 
@@ -21,7 +21,7 @@ func Update() {
 			continue
 		}
 
-		var author providers.ProviderAuthor
+		var author providers.CurseForgeAuthor
 
 		if err := json.NewDecoder(resp.Body).Decode(&author); err != nil {
 			fmt.Println("Error decoding JSON:", err)
@@ -30,12 +30,12 @@ func Update() {
 		}
 
 		util.CloseBody(resp.Body)
-		processProjects(author.Projects)
+		processProjectsCurseForge(author.Projects)
 		time.Sleep(1 * time.Minute)
 	}
 }
 
-func processProjects(projects []providers.ProviderProject) {
+func processProjectsCurseForge(projects []providers.CurseForgeProject) {
 	for _, providerProject := range projects {
 		resp, err := http.Get(domain.CFWidgetProject + strconv.Itoa(providerProject.ID))
 
@@ -43,14 +43,14 @@ func processProjects(projects []providers.ProviderProject) {
 			continue
 		}
 
-		var projectInfo providers.ProviderProjectInfo
+		var projectInfo providers.CurseForgeProjectInfo
 
 		if err := json.NewDecoder(resp.Body).Decode(&projectInfo); err != nil {
 			fmt.Println("Error decoding JSON:", err)
 			continue
 		}
 
-		data[providerProject.Name] = projectInfo.Downloads.Total
+		dataCurseForge[providerProject.Name] = projectInfo.Downloads.Total
 		util.CloseBody(resp.Body)
 	}
 }
