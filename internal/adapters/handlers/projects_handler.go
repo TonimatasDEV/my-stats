@@ -12,6 +12,10 @@ type ProjectsHandler struct {
 	service *services.ProjectsService
 }
 
+func NewProjectsHandler(service *services.ProjectsService) *ProjectsHandler {
+	return &ProjectsHandler{service: service}
+}
+
 type SendProjects struct {
 	Result []domain.Project `json:"result"`
 }
