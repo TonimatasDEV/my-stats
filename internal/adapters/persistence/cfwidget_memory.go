@@ -11,9 +11,9 @@ import (
 	"time"
 )
 
-var dataCurseForge = make(map[string]int)
+var dataCFWidget = make(map[string]int)
 
-func updateCurseForge() {
+func updateCFWidget() {
 	for {
 		resp, err := http.Get(domain.CFWidget)
 
@@ -21,7 +21,7 @@ func updateCurseForge() {
 			continue
 		}
 
-		var author providers.CurseForgeAuthor
+		var author providers.CFWidgetAuthor
 
 		if err := json.NewDecoder(resp.Body).Decode(&author); err != nil {
 			log.Println("Error decoding JSON:", err)
@@ -30,12 +30,12 @@ func updateCurseForge() {
 		}
 
 		util.CloseBody(resp.Body)
-		processProjectsCurseForge(author.Projects)
+		processProjectsCFWidget(author.Projects)
 		time.Sleep(1 * time.Minute)
 	}
 }
 
-func processProjectsCurseForge(projects []providers.CurseForgeProject) {
+func processProjectsCFWidget(projects []providers.CFWidgetProject) {
 	for _, providerProject := range projects {
 		resp, err := http.Get(domain.CFWidgetProject + strconv.Itoa(providerProject.ID))
 
@@ -43,14 +43,14 @@ func processProjectsCurseForge(projects []providers.CurseForgeProject) {
 			continue
 		}
 
-		var projectInfo providers.CurseForgeProjectInfo
+		var projectInfo providers.CFWidgetProjectInfo
 
 		if err := json.NewDecoder(resp.Body).Decode(&projectInfo); err != nil {
 			log.Println("Error decoding JSON:", err)
 			continue
 		}
 
-		dataCurseForge[providerProject.Name] = projectInfo.Downloads.Total
+		dataCFWidget[providerProject.Name] = projectInfo.Downloads.Total
 		util.CloseBody(resp.Body)
 	}
 }
