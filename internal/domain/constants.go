@@ -5,4 +5,5 @@ const (
 	CFWidgetProject = "https://api.cfwidget.com/"
 	Modrinth        = "https://api.modrinth.com/v2/user/tonimatasdev/projects"
 	Spiget          = "https://api.spiget.org/v2/authors/803111/resources"
+	Hangar          = "https://hangar.papermc.io/api/v1/projects?owner=tonimatasdev&limit=10&offset=0"
 )
