@@ -57,7 +57,7 @@ func main() {
 
 	var err error
 	if strings.EqualFold(os.Getenv("SSL_ENABLED"), "true") {
-		err = router.Run(address, os.Getenv("SSL_CERT"), os.Getenv("SSL_KEY"))
+		err = router.RunTLS(address, os.Getenv("SSL_CERT"), os.Getenv("SSL_KEY"))
 	} else {
 		err = router.Run(address)
 	}
