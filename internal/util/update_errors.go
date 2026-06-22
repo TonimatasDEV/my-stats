@@ -16,7 +16,7 @@ func IsNotNil(err error) bool {
 }
 
 func IsNotOk(resp *http.Response) bool {
-	if resp.StatusCode != 200 {
+	if resp.StatusCode != http.StatusOK {
 		log.Printf("Error getting CF Widget data: %d\n", resp.StatusCode)
 		CloseBody(resp.Body)
 		return true
