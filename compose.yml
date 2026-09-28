@@ -1,0 +1,12 @@
+services:
+  web:
+    image: ghcr.io/tonimatasdev/my-stats:latest
+    restart: unless-stopped
+    environment:
+      - GIN_MODE=release
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+      - 9.9.9.9
+    ports:
+      - 8088:8088
